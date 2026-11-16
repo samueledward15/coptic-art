@@ -2,7 +2,15 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#6D2E26">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Coptic Art - COTA">
+<meta name="application-name" content="Coptic Art - COTA">
 <title>الفن القبطي — ملخص تفاعلي (ص ٣–٥٣)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;500;700;800&family=Cinzel:wght@500;700&display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Coptic&display=swap">
@@ -561,6 +569,27 @@ figure.ph figcaption a{display:block;font-size:11px;color:var(--teal);text-decor
 .gvid .fr{width:100%;aspect-ratio:16/9;border:0;border-radius:10px}
 .gq-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .gq-img{max-height:260px;width:100%;object-fit:contain;border-radius:10px;background:#F3ECE1}
+.pav{display:block;width:76px;height:76px;margin:0 auto 6px;border-radius:50%;background:#F3ECE1 center 20%/cover no-repeat;border:2.5px solid var(--gold-rule,#B88A3E);position:relative}
+.pav.rel{border-style:dashed;border-color:var(--muted)}.pav.rel i{position:absolute;bottom:-2px;inset-inline-end:-2px;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid var(--line2,#ddd);font:700 12px/20px var(--fu);font-style:normal;color:var(--muted);text-align:center}
+.pav.big{width:96px;height:96px;margin:0}
+.pfig{margin:12px 0 0}.pfig img{width:100%;max-height:340px;object-fit:contain;background:#F3ECE1;border-radius:10px}.pfig figcaption{font:500 12.5px var(--fu);color:var(--muted);margin-top:4px}
+.tab .no.nic{width:30px;height:30px;border-radius:8px;background:var(--soft) center/88% no-repeat;position:relative;color:transparent}
+.tab .no.nic b{position:absolute;bottom:-5px;inset-inline-end:-7px;min-width:15px;height:15px;padding:0 3px;border-radius:99px;background:var(--muted);color:#fff;font:700 10px/15px var(--fu);text-align:center}
+.tab.on .no.nic{background-color:var(--wine-soft);box-shadow:0 0 0 2px var(--wine)}.tab.on .no.nic b{background:var(--wine)}
+.chap a .cic{position:absolute;top:10px;inset-inline-end:10px;width:40px;height:40px;opacity:.95}
+/* mobile: no fullscreen; hamburger drawer always */
+@media(max-width:900px){
+ .fs{display:none!important}
+ .burger{display:grid!important}
+ .side{position:fixed!important;top:0;inset-inline-start:0;z-index:80;width:290px;max-width:86vw;height:100vh;height:100dvh;display:block!important;overflow:auto;padding:22px 14px 22px 10px;background:var(--bg);border:none;border-inline-end:1px solid var(--line);box-shadow:0 10px 40px -10px rgba(0,0,0,.3);transform:translateX(105%);transition:transform .28s ease;backdrop-filter:none}
+ body.drawer .side{transform:none}
+ .side h5,.side .foot{display:block!important}
+ .side .tab{width:100%;border-radius:9px;padding:9px 10px;font-size:15px;white-space:normal}
+ .side .tab .no{display:grid!important}.side .tab .ck{display:inline!important}
+ .side .tab.on{background:var(--wine-soft);color:var(--wine)}
+ .side .tab.on::before{display:none}
+ body.drawer .scrim{opacity:1;pointer-events:auto}
+}
 </style>
 </head>
 <body>
@@ -1374,6 +1403,7 @@ figure.ph figcaption a{display:block;font-size:11px;color:var(--teal);text-decor
 
 
 <script>
+const IMG={{IMGS}};
 const AR = n => String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
 const $ = s => document.querySelector(s);
 const store = {get(k,d){try{const v=localStorage.getItem('cota-art1-'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('cota-art1-'+k,JSON.stringify(v))}catch(e){}}};
@@ -1680,11 +1710,60 @@ const PPL=[
  ['فؤ','الملك فؤاد الأول','Fuad I','roy','زيارة ٢١/١٢/١٩٢١','زار المتحف وكنائس مصر القديمة، وصحب ملك بلجيكا (١٩٣٠) وملك إيطاليا (١٩٣٤).','Fuad_I_of_Egypt'],
  ['فا','الملك فاروق','Farouk','roy','زيارة يونيو ١٩٣٥','زار المتحف وليًا للعهد مع الأميرتين فوزية وفائزة.','Farouk_of_Egypt'],
  ['عط','الأمير عمر طوسون','Omar Toussoun','roy','زيارة ٥/١٢/١٩٤٢','راعي الفنون.','Omar_Toussoun']];
+/* ---------- people pictures: artworks of the person (p) or a place/object linked to them (r) ---------- */
+const PIMG={'القديس أندراوس':['p_andrew','p','أيقونة القديس أندراوس — كنيسة القديسة باراسكيفي، لانجاداس','Public domain','038 Saint Andrew Icon from Saint Paraskevi Church in Langadas.jpg'],
+'القديس مرقس الرسول':['p_mark2','p','أيقونة القديس مرقس الإنجيلي (ماسك الإنجيل)','Public domain','087 Mark the Evangelist Icon from Saint Paraskevi Church in Langadas.jpg'],
+'مار أفرام السرياني':['p_ephrem','p','أيقونة مار أفرام السرياني — الكنيسة السريانية بالقدس','CC BY-SA 4.0','St. Ephrem the Syrian icon - Syriac Orthodox Church - Jerusalem.jpg'],
+'أغسطس':['p_augustus','p','تمثال أغسطس «بريما بورتا» — الفاتيكان','Public domain','Statue-Augustus.jpg'],
+'أوثون قيصر':['p_otho','p','تمثال نصفي للإمبراطور أوثون','No restrictions',''],
+'سبتيموس سفيروس':['p_severus','p','سبتيموس سفيروس — جليبتوتيك ميونخ','Public domain','Septimius Severus Glyptothek Munich 357 cropped.jpg'],
+'ترايانوس ديكيوس':['p_decius','p','ديكيوس — متاحف الكابيتول','CC BY-SA 4.0','Musei Capitolini MC 482 (Decius).jpg'],
+'دقلديانوس':['p_diocl','p','دقلديانوس — متحف إسطنبول الأثري','CC BY-SA 4.0','Bust of Diocletian, Istanbul Archaeological Museums.jpg'],
+'قسطنطين':['p_const','p','رأس تمثال قسطنطين الضخم — متاحف الكابيتول','CC0','Head of Colossus of Constantine, Aug 24 2021.jpg'],
+'ثيودوسيوس الأول':['p_theod','p','ثيودوسيوس على «طبق ثيودوسيوس» الفضي (٣٨٨م)','Public domain','Missorium of Theodosius I (detail).png'],
+'الملكة زنوبيا':['p_zenobia','p','زنوبيا على عملة أنطونيانوس مكتوب عليها «SZENOBIA AVG»','CC BY-SA 2.5','Antoninianus of Zenobia (obverse).png'],
+'السلطان سليم الأول':['p_selim','p','منمنمة عثمانية: سليم الأول (فوق) وابنه سليمان','Public domain','Sultans of the Ottoman Empire - Selim I - Suleiman I.jpeg'],
+'صلاح الدين الأيوبي':['p_saladin','p','صلاح الدين — لوحة كريستوفانو ديل ألتيسيمو (ق١٦، تخيلية)','CC BY-SA 3.0',"Cristofano dell'altissimo, saladino, ante 1568.JPG"],
+'ابن خلدون':['p_khaldun','p','تمثال ابن خلدون — شارع الحبيب بورقيبة، تونس','CC BY-SA 4.0',"Statue d'Ibn Khaldoun - تمثال ابن خلدون - Statue of Ibn Khaldun.jpg"],
+'جاردنر':['ankh','r','علامة العنخ اللي فسّرها جاردنر'],
+'إيزاك فانوس':['j_iconost','r','حامل أيقونات قبطي — مجال انتعاش الأيقونة الحديثة'],
+'الأزرقي':['p_kaaba','r','الكعبة (صورة أرشيفية ١٩١٦–١٩١٨) — موضوع «أخبار مكة»','Public domain','T E Lawrence and the Arab Revolt 1916 - 1918 Q59892.jpg'],
+'باقوم':['i_kiswa','r','كسوة الكعبة — مرتبطة بقصة بناء الكعبة والصنّاع المصريين'],
+'الخليفة الوليد':['i_umay','r','فسيفساء الجامع الأموي بدمشق اللي بناه الوليد'],
+'عمر بن عبد العزيز':['i_mihrab','r','المحراب — أول محراب ظهر في عهده'],
+'الخليفة المعز':['p_azhar','r','الجامع الأزهر — اتبنى في عهد المعز (لوحة إيفان بيليبين)','Public domain','Ivan Bilibin 182.jpg'],
+'الحاكم بأمر الله':['i_hakim','r','جامع الحاكم بأمر الله'],
+'الآمر بأحكام الله':['aqmar','r','الجامع الأقمر — اتبنى في عهد الآمر (١١٢٥م)'],
+'خمارويه بن أحمد بن طولون':['i_minaret','r','جامع أبيه أحمد بن طولون'],
+'المقوقس':['j_babylon','r','حصن بابليون — مقر الحكم البيزنطي وقت الفتح'],
+'مارييت باشا':['p_serapeum','r','إعادة بناء دفنة في السرابيوم بسقارة اللي اكتشفه مارييت (١٨٥١)','CC BY-SA 4.0','Serapeum Burial Vault Reconstruction.png'],
+'ألفريد بتلر':['i_hanging','r','الكنيسة المعلقة — من الكنايس اللي وصفها في كتابه'],
+'إميل أميلينو':['p_abydos','r','الأوزيريون في أبيدوس — من مواقع حفائره','CC BY-SA 3.0','Osireion at Abydos.jpg'],
+'هرتس باشا':['p_mia2','r','متحف الفن الإسلامي (دار الآثار العربية) — كان مديره','CC BY-SA 4.0','Museum of Islamic Art Cairo DSCF7680.jpg'],
+'البابا كيرلس الخامس':['i_hanging','r','الكنيسة المعلقة — جمع فيها التحف القبطية ١٩٠٢'],
+'نخله بك الباراتي':['i_hanging','r','الكنيسة المعلقة اللي كان ناظرها'],
+'ماسبيرو':['p_egmus','r','المتحف المصري بالتحرير — أنشأ فيه القسم القبطي','CC BY-SA 3.0','Facade of the Egyptian Museum, Tahrir Square, Cairo, Egypt1.jpg'],
+'مرقس سميكة باشا':['j_cmus','r','المتحف القبطي اللي أسسه'],
+'البابا يؤانس التاسع عشر':['i_suryan','r','دير السريان — من مكتبات الأديرة اللي اتنظّمت في عهده'],
+'يسّى عبد المسيح':['j_copms','r','مخطوط قبطي — سجّل محتوى مكتبات الأديرة'],
+'الأمير حسين كامل':['j_cmus','r','المتحف القبطي اللي تبرّع لإقامته'],
+'قليني فهمي':['j_copms','r','مخطوط قبطي — اقترح إهداء أهم مخطوط لروزفلت'],
+'تيودور روزفلت':['p_cairouni','r','جامعة القاهرة (الجامعة المصرية) — خطب فيها ١٩١٠','Public domain','CairoUniv.jpg'],
+'توجومينا':['j_cmus','r','المتحف القبطي — أول مدير مصري له'],
+'الملك فؤاد الأول':['j_cmus','r','المتحف القبطي — زاره ١٩٢١'],
+'الملك فاروق':['j_cmus','r','المتحف القبطي — زاره ١٩٣٥'],
+'الأمير عمر طوسون':['j_cmus','r','المتحف القبطي — زاره ١٩٤٢'],
+'سومرز كلارك':['i_suryan','r','عمارة الأديرة القبطية — موضوع كتاباته'],
+'سترزيجوفسكي':['i_basket','r','تاج عمود قبطي على شكل سلة — من أمثلة نظريته عن أصل الفن القبطي']};
+
+const pAv=(p,big)=>{const m=PIMG[p[1]];if(!m||!IMG[m[0]])return med(p[0],PG[p[3]][1]);return `<span class="pav${m[1]=='r'?' rel':''}${big?' big':''}" style="background-image:url(${IMG[m[0]]})" title="${m[2]}">${m[1]=='r'?'<i>⌂</i>':''}</span>`};
+const pFig=p=>{const m=PIMG[p[1]];if(!m||!IMG[m[0]])return '';const c=CRED[m[0]];return `<figure class="pfig"><img src="${IMG[m[0]]}" alt=""><figcaption>${m[1]=='r'?'<b>مكان/أثر مرتبط بيه:</b> ':''}${m[2]}${c?` · <a href="${c[2]}" target="_blank" rel="noopener">${c[1]}</a>`:''}</figcaption></figure>`};
+
 let pg='all';
 $('#pfilter').innerHTML=`<button class="chip on" data-g="all">الكل (${AR(PPL.length)})</button>`+Object.entries(PG).map(([k,v])=>`<button class="chip" data-g="${k}">${v[0]}</button>`).join('');
-function pRender(){$('#ppl').innerHTML=PPL.map((p,i)=>pg=='all'||p[3]==pg?`<div class="pp" data-i="${i}" tabindex="0">${med(p[0],PG[p[3]][1])}<div class="nmx">${p[1]}</div><div class="or">${p[2]!='—'?p[2]:''}</div><div class="rl">${p[4]}</div></div>`:'').join('')}
+function pRender(){$('#ppl').innerHTML=PPL.map((p,i)=>pg=='all'||p[3]==pg?`<div class="pp" data-i="${i}" tabindex="0">${pAv(p)}<div class="nmx">${p[1]}</div><div class="or">${p[2]!='—'?p[2]:''}</div><div class="rl">${p[4]}</div></div>`:'').join('')}
 $('#pfilter').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;document.querySelectorAll('#pfilter .chip').forEach(x=>x.classList.remove('on'));b.classList.add('on');pg=b.dataset.g;pRender()};
-function openP(i){const p=PPL[i];$('#mbody').innerHTML=`<div class="hd">${med(p[0],PG[p[3]][1])}<div><span class="tag">${PG[p[3]][0]}</span><h3 style="margin:4px 0 0">${p[1]}</h3><div class="lat" style="color:var(--teal)">${p[2]!='—'?p[2]:''}</div></div></div><p style="font-size:18px">${p[5]}</p>${p[6]?`<a class="btn" style="text-decoration:none;display:inline-block" href="https://en.wikipedia.org/wiki/${p[6]}" target="_blank" rel="noopener">صورته ونبذة على ويكيبيديا ↗</a>`:'<p style="font:500 13px var(--fu);color:var(--muted)">مفيش صفحة معروفة له على ويكيبيديا — ابحث عنه في مراجع الكلية.</p>'}`;$('#modal').classList.add('on')}
+function openP(i){const p=PPL[i];$('#mbody').innerHTML=`<div class="hd">${pAv(p,1)}<div><span class="tag">${PG[p[3]][0]}</span><h3 style="margin:4px 0 0">${p[1]}</h3><div class="lat" style="color:var(--teal)">${p[2]!='—'?p[2]:''}</div></div></div>${pFig(p)}<p style="font-size:18px">${p[5]}</p>${p[6]?`<a class="btn" style="text-decoration:none;display:inline-block" href="https://en.wikipedia.org/wiki/${p[6]}" target="_blank" rel="noopener">صورته ونبذة على ويكيبيديا ↗</a>`:'<p style="font:500 13px var(--fu);color:var(--muted)">مفيش صفحة معروفة له على ويكيبيديا — ابحث عنه في مراجع الكلية.</p>'}`;$('#modal').classList.add('on')}
 $('#ppl').onclick=e=>{const c=e.target.closest('.pp');if(c)openP(+c.dataset.i)};
 $('#ppl').onkeydown=e=>{const c=e.target.closest('.pp');if(c&&e.key=='Enter')openP(+c.dataset.i)};
 $('#mx').onclick=()=>$('#modal').classList.remove('on');$('#modal').onclick=e=>{if(e.target.id=='modal')$('#modal').classList.remove('on')};
@@ -2184,7 +2263,6 @@ const CS=q=>`https://commons.wikimedia.org/w/index.php?search=${encodeURICompone
 const LK=(href,t)=>`<a class="lk" href="${href}" target="_blank" rel="noopener">${t||'شوف الصورة'} ↗</a>`;
 
 /* ---------- real images (Wikimedia Commons) ---------- */
-const IMG={{IMGS}};
 const CF=f=>'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(f.replace(/ /g,'_'));
 const CRED={
  j_memphis:['أطلال منف (ميت رهينة – البدرشين): موقع معبد بتاح «حت-كا-بتاح» اللي منه جه اسم «إيجبتوس»','Wikimedia Commons',CS('Memphis Egypt ruins Mit Rahina')],
@@ -2275,9 +2353,9 @@ const GL=[
 
  {k:'orph',c:'myth',ar:'أورفيوس ويوريديكي',o:'Ὀρφεύς · Εὐρυδίκη',en:'Orpheus & Eurydice',img:'g_orph',role:'أعظم موسيقار في الأساطير؛ موسيقاه بتسحر الحيوانات والشجر والحجر.',sym:'شاب لابس الطاقية الفريجية، ماسك القيثارة، وحواليه حيوانات هادية.',story:'مراته يوريديكي ماتت بلدغة <b>حية</b>، فنزل للعالم السفلي بالقيثارة وأقنع هاديس، بشرط ما يبصّش وراه — فبصّ فخسرها للأبد.',echo:'أورفيوس نزل لعالم الموتى <b>بالقيثارة</b>، والمسيح نزل <b>بالصليب</b> وغلب الموت. وموسيقاه اللي بتهدّي الوحوش ← المسيح الراعي اللي بيجمع الخليقة.',ch:['greco'],v:[['RhaepLsP5eg','en','TED-Ed: The tragic myth of Orpheus and Eurydice'],['uD5OkNVy7-M','ar','ميثولوجي: أسطورة أورفيوس ورحلة العالم السفلي']]},
  {k:'leda',c:'myth',ar:'ليدا والبجعة',o:'Λήδα',en:'Leda & the Swan',img:'g_leda',role:'ملكة إسبرطة اللي زيوس جالها في هيئة بجعة.',sym:'امرأة وبجعة كبيرة جنبها.',story:'ولدت من بيضة: هيلينا (طروادة) والتوأم كاستور وبولكس.',echo:'«ليدا والبجعة» من الموضوعات المذكورة في المتحف القبطي (نحت أهناسيا) — دليل إن الأساطير فضلت في الزخرفة حتى بعد المسيحية.',ch:['greco']},
- {k:'daphne',c:'myth',ar:'أبوللو ودافني',o:'Ἀπόλλων · Δάφνη',en:'Apollo & Daphne',img:'',role:'حورية هربت من حب أبولو.',sym:'بنت بتتحوّل لشجرة: إيديها فروع وشعرها ورق.',story:'إيروس رمى أبولو بسهم الحب ورماها بسهم النفور؛ فدعت أبوها إله النهر فحوّلها لشجرة غار.',echo:'«أبوللو ودافني» من الموضوعات المنحوتة في المتحف القبطي؛ والغار بقى إكليل النصرة ← <b>إكليل الشهيد</b>.',ch:['greco'],v:[['GD4zomtL8yw','en','Apollo and Daphne: the myth']]},
+ {k:'daphne',c:'myth',ar:'أبوللو ودافني',o:'Ἀπόλλων · Δάφνη',en:'Apollo & Daphne',img:'p_daphne2',role:'حورية هربت من حب أبولو.',sym:'بنت بتتحوّل لشجرة: إيديها فروع وشعرها ورق.',story:'إيروس رمى أبولو بسهم الحب ورماها بسهم النفور؛ فدعت أبوها إله النهر فحوّلها لشجرة غار.',echo:'«أبوللو ودافني» من الموضوعات المنحوتة في المتحف القبطي؛ والغار بقى إكليل النصرة ← <b>إكليل الشهيد</b>.',ch:['greco'],v:[['GD4zomtL8yw','en','Apollo and Daphne: the myth']]},
  {k:'nereid',c:'myth',ar:'النيريدات (حوريات البحر)',o:'Νηρηΐδες',en:'Nereids',img:'g_nereid',role:'بنات إله البحر «نيريوس» — ٥٠ حورية بيعيشوا في البحر.',sym:'بنات راكبين وحوش بحرية أو دلافين، وسط موج وأسماك. أشهرهم «جالاتيا».',story:'بيرافقوا بوسيدون وبيساعدوا البحارة.',echo:'مشاهد البحر والأسماك فضلت في الفسيفساء والنسيج؛ والسمكة بقت رمز مسيحي (ΙΧΘΥΣ).',ch:[]},
- {k:'herac',c:'myth',ar:'هرقل والأسد النيمي',o:'Ἡρακλῆς',en:'Heracles / Hercules',img:'',role:'أقوى الأبطال، ابن زيوس من امرأة بشرية.',sym:'رجل عضلي بـ<b>جلد أسد</b> على راسه وكتافه وماسك نبوت.',story:'عمل ١٢ مهمة مستحيلة، أولها خنق الأسد النيمي اللي جلده ما يتخرقش.',echo:'«ملحمة هرقل» من الموضوعات في المتحف القبطي؛ والبطل اللي بيغلب الوحش ← القديس اللي بيغلب الشر.',ch:['greco']},
+ {k:'herac',c:'myth',ar:'هرقل والأسد النيمي',o:'Ἡρακλῆς',en:'Heracles / Hercules',img:'p_herac2',role:'أقوى الأبطال، ابن زيوس من امرأة بشرية.',sym:'رجل عضلي بـ<b>جلد أسد</b> على راسه وكتافه وماسك نبوت.',story:'عمل ١٢ مهمة مستحيلة، أولها خنق الأسد النيمي اللي جلده ما يتخرقش.',echo:'«ملحمة هرقل» من الموضوعات في المتحف القبطي؛ والبطل اللي بيغلب الوحش ← القديس اللي بيغلب الشر.',ch:['greco']},
  {k:'psyche',c:'myth',ar:'إيروس وبسيشه',o:'Ἔρως · Ψυχή',en:'Cupid & Psyche',img:'g_psyche',role:'قصة الحب بين إله الحب و«بسيشه» (= الروح بالإغريقي).',sym:'شاب وبنت متعانقين؛ وبسيشه أحيانًا بجناحات فراشة.',story:'بسيشه عدّت تجارب صعبة عشان تستحق حبيبها، وفي الآخر بقت خالدة.',echo:'اتقرت رمزيًا كرحلة <b>النفس</b> لحد الاتحاد بالحب الإلهي.',ch:[],v:[['Gjj_-CPxjCM','en','TED-Ed: The myth of Cupid and Psyche']]},
  {k:'beller',c:'myth',ar:'بيليروفون والكيميرا',o:'Βελλεροφῶν',en:'Bellerophon',img:'g_beller',role:'بطل راكب الحصان المجنّح «بيجاسوس».',sym:'فارس على حصان مجنّح بيطعن وحش (الكيميرا: أسد + معزة + ثعبان).',story:'قتل الكيميرا من فوق وهو طاير على بيجاسوس.',echo:'نفس تكوين <b>الفارس اللي بيطعن الوحش</b> زي حورس الفارس — والاتنين وراء صورة <b>مارجرجس</b> والقديسين الفرسان.',ch:['pharaonic'],v:[['BDprlH1sK_Y','en','TED-Ed: The myth of Pegasus and the Chimera']]},
  {k:'pan',c:'myth',ar:'بان',o:'Πάν',en:'Pan',img:'g_pan',role:'إله الرعاة والغابات والموسيقى البرية.',sym:'نصّه التحتاني معزة (رجلين بحوافر وقرون) وبيعزف على <b>ناي بان</b> (الصفّارة المتعددة).',story:'في الصورة بيعلّم الراعي «دافنيس» العزف على الناي. ومنه جت كلمة «Panic» (الفزع).',echo:'«بان والراقصات» من موضوعات المتحف القبطي؛ وللأسف شكله (قرون وحوافر) بقى لاحقًا صورة الشيطان في الفن الأوروبي.',ch:['greco']},
@@ -2296,7 +2374,7 @@ const GL=[
  {k:'ambo',c:'term',ar:'الإنبل (المنبر الكنسي)',o:'ἄμβων',en:'Ambo',img:'i_ambon',role:'منصة مرتفعة في الكنيسة بيتقرا منها الإنجيل وتتقال العظة.',sym:'سلم ومنصة على أعمدة، غالبًا رخام.',story:'إنبل الكنيسة المعلقة على ١٥ عمود رخام.',echo:'الإنبل ← <b>المنبر</b> في المسجد؛ والمقوقس أهدى منبر لعمرو بن العاص.',ch:['islamic']},
  {k:'orant',c:'term',ar:'الأورانت (هيئة المصلّي)',o:'orans',en:'Orant',img:'j_orant',role:'شخص واقف رافع إيديه للسما في صلاة — من أشهر الصور في الفن المسيحي المبكر.',sym:'وقفة مواجهة، دراعين مرفوعين مفتوحين.',story:'كانت رمز للنفس اللي بتصلي بعد الموت، وبتظهر على شواهد القبور.',echo:'شواهد القبور القبطية (زي الصورة) بتجمع الكتابة القبطية مع زخارف معمارية — وهيئة المصلّي ورثت وقفة الصلاة المصرية القديمة.',ch:['features']}
 ];
-const GCRED={g_ptah:['تمثال بتاح — متحف المتروبوليتان','CC0','Ptah Statue MET DP216330.jpg'],g_ra:['رع-حور-آختي — مقبرة نفرتاري','Public domain','Maler der Grabkammer der Nefertari 001.jpg'],g_amun:['آمون بملامح توت عنخ آمون — الكرنك','CC BY-SA 2.0','Statue of Amun with features of Tutankhamun, Karnak Temple (2515547318).jpg'],g_osiris:['أوزوريس — مقبرة نفرتاري','Public domain','Osiris-tomb-of-Nefertari.jpg'],g_isis:['إيزيس تقود الملكة نفرتاري — نسخة المتروبوليتان','CC0','Queen Nefertari being led by Isis MET DP167142.jpg'],g_horus:['تمثال حورس الصقر — معبد إدفو','CC BY 4.0','Temple of Edfu, Statue of Horus, Egypt.jpg'],g_seth:['نقش لست اتكشط اسمه وصورته — عصر حريحور','Public domain','Relief Herihor Seth obliterated.jpg'],g_nut:['جب ونوت وشو — بردية','Public domain','Geb, Nut, Shu.jpg'],g_anubis:['أنوبيس يحنّط مومياء سننجم','Public domain','Anubis attending the mummy of Sennedjem.jpg'],g_hathor:['معبد حتحور بدندرة — نقش','CC BY-SA 3.0','Dendera Temple complex, Temple of Hathor - panoramio (16).jpg'],g_thoth:['تحوت في هيئة إيبس — اللوفر','Public domain','Ibis couché, le dieu Thot (Louvre, E 17380).jpg'],g_sobek:['سوبك — معبد كوم أمبو','CC BY-SA 3.0','Kom Ombo, Sobek 0319.JPG'],g_zeus:['زيوس أوتريكولي — متاحف الفاتيكان','Public domain','Zeus Otricoli Pio-Clementino Inv257.jpg'],g_aphro:['فينوس ميلو — اللوفر','CC BY-SA 2.5','Venus de Milo.JPG'],g_eros:['إيروس يشد قوسه — متاحف الكابيتول','CC BY 2.5','Eros bow Musei Capitolini MC410.jpg'],g_dion:['تمثال ديونيسيوس — متحف هيراكليون','CC0','Statue Dionysus AMH.jpg'],g_apollo:['أبولو بلفيدير — الفاتيكان','CC BY-SA 4.0','Apollo of the Belvedere.jpg'],g_hermes:['هرمس يحمل ديونيسيوس الطفل — براكسيتيليس، أوليمبيا','CC BY-SA 4.0','Hermes and the infant Dionysus by Praxiteles.jpg'],g_athena:['أثينا بارثينوس — نسخة حديثة بالحجم الكامل (ناشفيل)','FAL','Athena Parthenos LeQuire.jpg'],g_posei:['برونز أرتيميسيون: زيوس أو بوسيدون — أثينا','CC0','Bronze Zeus or Poseidon NAMA X 15161 Athens Greece.jpg'],g_artemis:['ديانا فرساي — اللوفر','Public domain','Detail Diana Versailles Louvre Ma589.jpg'],g_hades:['هاديس يخطف برسيفوني — جدارية فيرجينا','Public domain','Hades and Persephone, Vergina.jpg'],g_serapis:['تمثال نصفي فضي لسرابيس — المتروبوليتان','CC0','Silver bust of Serapis MET DT6658.jpg'],g_harpo:['حربقراط — متحف سان ريمون، تولوز','Public domain','(Toulouse) Harpocrate - Musée Saint-Raymond, Ra 40.jpg'],g_isisl:['إيزيس ترضع حربقراط — فخار','CC BY 2.0','Bust of the goddess Isis breastfeeding her son Harpocrates (5123266863).jpg'],g_antinous:['أنطينوس في هيئة أوزوريس — الفاتيكان','Public domain','Statue of Antinous (Emperor Hadrian\'s Lover) as Egyptian God Osiris (4).jpg'],g_orph:['أورفيوس يسحر الحيوانات — فسيفساء رومانية','Public domain','Roman Orpheus Taming Wild Animals.jpg'],g_leda:['ليدا والبجعة — نقش رخامي من كنوسوس','CC BY-SA 4.0','Leda and the Swan, Marble relief, Knossos, 1st-2nd century AD, AMH, 145404.jpg'],g_nereid:['جالاتيا — فسيفساء، متحف سوسة','CC BY-SA 3.0','Sousse Galatea.JPG'],g_psyche:['إيروس وبسيشه — متاحف الكابيتول','CC BY-SA 3.0','Amor and Psyche-Capitoline Museums.jpg'],g_beller:['بيليروفون يقتل الكيميرا — فسيفساء رودس','CC BY-SA 4.0','Rhodos Mosaic Bellerophon killing Chimaera, in Rhodes archaeological museum.jpg'],g_pan:['بان ودافنيس — متحف نابولي','CC BY-SA 4.0','Pan and Daphnis group (Naples).jpg'],g_faravahar:['الفرافاهار — برسيبوليس','CC BY-SA 3.0','Farvahar.JPG'],g_encaustic:['بورتريه رجل بلحية — الفيوم (إنكوستيك)','Public domain','Homme avec barbe, portrait funéraire, Fayoum, Égypte.jpg'],g_basil:['تخطيط بازيليكا القديس بطرس القديمة','Public domain','Old St Peters Basilica plan.png'],g_iconost:['إيقونستاز الكنيسة المعلقة','CC BY-SA 3.0','Cairo, chiesa sospesa, interno, iconostasi.JPG'],g_muq:['مقرنصات — مسجد الرفاعي بالقاهرة','Public domain','Al-Rifa\'i Mosque, Cairo 42.jpg']};
+const GCRED={g_ptah:['تمثال بتاح — متحف المتروبوليتان','CC0','Ptah Statue MET DP216330.jpg'],g_ra:['رع-حور-آختي — مقبرة نفرتاري','Public domain','Maler der Grabkammer der Nefertari 001.jpg'],g_amun:['آمون بملامح توت عنخ آمون — الكرنك','CC BY-SA 2.0','Statue of Amun with features of Tutankhamun, Karnak Temple (2515547318).jpg'],g_osiris:['أوزوريس — مقبرة نفرتاري','Public domain','Osiris-tomb-of-Nefertari.jpg'],g_isis:['إيزيس تقود الملكة نفرتاري — نسخة المتروبوليتان','CC0','Queen Nefertari being led by Isis MET DP167142.jpg'],g_horus:['تمثال حورس الصقر — معبد إدفو','CC BY 4.0','Temple of Edfu, Statue of Horus, Egypt.jpg'],g_seth:['نقش لست اتكشط اسمه وصورته — عصر حريحور','Public domain','Relief Herihor Seth obliterated.jpg'],g_nut:['جب ونوت وشو — بردية','Public domain','Geb, Nut, Shu.jpg'],g_anubis:['أنوبيس يحنّط مومياء سننجم','Public domain','Anubis attending the mummy of Sennedjem.jpg'],g_hathor:['معبد حتحور بدندرة — نقش','CC BY-SA 3.0','Dendera Temple complex, Temple of Hathor - panoramio (16).jpg'],g_thoth:['تحوت في هيئة إيبس — اللوفر','Public domain','Ibis couché, le dieu Thot (Louvre, E 17380).jpg'],g_sobek:['سوبك — معبد كوم أمبو','CC BY-SA 3.0','Kom Ombo, Sobek 0319.JPG'],g_zeus:['زيوس أوتريكولي — متاحف الفاتيكان','Public domain','Zeus Otricoli Pio-Clementino Inv257.jpg'],g_aphro:['فينوس ميلو — اللوفر','CC BY-SA 2.5','Venus de Milo.JPG'],g_eros:['إيروس يشد قوسه — متاحف الكابيتول','CC BY 2.5','Eros bow Musei Capitolini MC410.jpg'],g_dion:['تمثال ديونيسيوس — متحف هيراكليون','CC0','Statue Dionysus AMH.jpg'],g_apollo:['أبولو بلفيدير — الفاتيكان','CC BY-SA 4.0','Apollo of the Belvedere.jpg'],g_hermes:['هرمس يحمل ديونيسيوس الطفل — براكسيتيليس، أوليمبيا','CC BY-SA 4.0','Hermes and the infant Dionysus by Praxiteles.jpg'],g_athena:['أثينا بارثينوس — نسخة حديثة بالحجم الكامل (ناشفيل)','FAL','Athena Parthenos LeQuire.jpg'],g_posei:['برونز أرتيميسيون: زيوس أو بوسيدون — أثينا','CC0','Bronze Zeus or Poseidon NAMA X 15161 Athens Greece.jpg'],g_artemis:['ديانا فرساي — اللوفر','Public domain','Detail Diana Versailles Louvre Ma589.jpg'],g_hades:['هاديس يخطف برسيفوني — جدارية فيرجينا','Public domain','Hades and Persephone, Vergina.jpg'],g_serapis:['تمثال نصفي فضي لسرابيس — المتروبوليتان','CC0','Silver bust of Serapis MET DT6658.jpg'],g_harpo:['حربقراط — متحف سان ريمون، تولوز','Public domain','(Toulouse) Harpocrate - Musée Saint-Raymond, Ra 40.jpg'],g_isisl:['إيزيس ترضع حربقراط — فخار','CC BY 2.0','Bust of the goddess Isis breastfeeding her son Harpocrates (5123266863).jpg'],g_antinous:['أنطينوس في هيئة أوزوريس — الفاتيكان','Public domain','Statue of Antinous (Emperor Hadrian\'s Lover) as Egyptian God Osiris (4).jpg'],g_orph:['أورفيوس يسحر الحيوانات — فسيفساء رومانية','Public domain','Roman Orpheus Taming Wild Animals.jpg'],g_leda:['ليدا والبجعة — نقش رخامي من كنوسوس','CC BY-SA 4.0','Leda and the Swan, Marble relief, Knossos, 1st-2nd century AD, AMH, 145404.jpg'],g_nereid:['جالاتيا — فسيفساء، متحف سوسة','CC BY-SA 3.0','Sousse Galatea.JPG'],g_psyche:['إيروس وبسيشه — متاحف الكابيتول','CC BY-SA 3.0','Amor and Psyche-Capitoline Museums.jpg'],g_beller:['بيليروفون يقتل الكيميرا — فسيفساء رودس','CC BY-SA 4.0','Rhodos Mosaic Bellerophon killing Chimaera, in Rhodes archaeological museum.jpg'],g_pan:['بان ودافنيس — متحف نابولي','CC BY-SA 4.0','Pan and Daphnis group (Naples).jpg'],g_faravahar:['الفرافاهار — برسيبوليس','CC BY-SA 3.0','Farvahar.JPG'],g_encaustic:['بورتريه رجل بلحية — الفيوم (إنكوستيك)','Public domain','Homme avec barbe, portrait funéraire, Fayoum, Égypte.jpg'],g_basil:['تخطيط بازيليكا القديس بطرس القديمة','Public domain','Old St Peters Basilica plan.png'],g_iconost:['إيقونستاز الكنيسة المعلقة','CC BY-SA 3.0','Cairo, chiesa sospesa, interno, iconostasi.JPG'],p_daphne2:['أبوللو ودافني — فسيفساء فيلا توري دي بالما (البرتغال)','CC BY-SA 2.0','Mosaic floor depicting Apollo and Daphne, from the Villa Torre de Palma near Monforte, Portugal.jpg'],p_herac2:['هرقل يصارع الأسد النيمي — حفر، المتروبوليتان','CC0','Hercules Fighting the Nemean Lion MET DP833067.jpg'],g_muq:['مقرنصات — مسجد الرفاعي بالقاهرة','Public domain','Al-Rifa\'i Mosque, Cairo 42.jpg']};
 for(const[k,v] of Object.entries(GCRED))CRED[k]=[v[0],v[1],CF(v[2])];
 
 (()=>{let gcat='all';
@@ -2335,6 +2413,14 @@ for(const[k,v] of Object.entries(GCRED))CRED[k]=[v[0],v[1],CF(v[2])];
  $('#gquizBtn').onclick=gq;
 })();
 
+for(const[k,v] of Object.entries(PIMG))if(v[4])CRED[v[0]]=[v[2],v[3],CF(v[4])];
+/* ---------- tab icons (COTA design-system illustrations) ---------- */
+(()=>{const EL={arch:'{{EL_arch}}',braid:'{{EL_braid}}',candle:'{{EL_candle}}',capital:'{{EL_capital}}',censer:'{{EL_censer}}',codex:'{{EL_codex}}',coin:'{{EL_coin}}',cross:'{{EL_cross}}',dove:'{{EL_dove}}',hourglass:'{{EL_hourglass}}',inkwell:'{{EL_inkwell}}',lamp:'{{EL_lamp}}',library:'{{EL_library}}',pharos:'{{EL_pharos}}',scroll:'{{EL_scroll}}',seal:'{{EL_seal}}',star:'{{EL_star}}'},TM={"home": "dove", "intro": "hourglass", "copt": "inkwell", "names": "scroll", "museum": "arch", "simaika": "library", "strz": "codex", "pharaonic": "lamp", "greco": "capital", "others": "coin", "islamic": "star", "eras6": "candle", "features": "cross", "timeline": "hourglass", "map": "pharos", "people": "seal", "gloss": "braid", "cards": "codex", "quiz": "inkwell", "critical": "censer"};
+document.querySelectorAll('#nav .tab').forEach(t=>{const v=t.dataset.v,n=t.querySelector('.no');if(!n||!TM[v])return;const num=/[٠-٩]/.test(n.textContent)?n.textContent:'';n.classList.add('nic');n.style.backgroundImage=`url("${EL[TM[v]]}")`;n.innerHTML=num?`<b>${num}</b>`:''});
+document.querySelectorAll('.chap a').forEach(a=>{const v=(a.getAttribute('href')||'').slice(1);if(!TM[v])return;const ic=a.querySelector('.ic');if(ic){ic.textContent='';ic.style.background=`var(--soft) url("${EL[TM[v]]}") center/86% no-repeat`}else a.insertAdjacentHTML('afterbegin',`<img class="cic" src="${EL[TM[v]]}" alt="">`)});
+})();
+/* ---------- PWA: offline cache on the hosted site ---------- */
+if('serviceWorker' in navigator&&/vercel\.app$|^localhost$/.test(location.hostname)){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
 /* roof: gable vs dome */
 $('#roofSvg').innerHTML=`<svg viewBox="0 0 420 200" class="ill" role="img" aria-label="جمالون خشبي مقابل قبة من الطوب">
  <g transform="translate(20,20)"><path d="M10 80 L90 20 L170 80 Z" fill="#E7D3B0" stroke="#7A5A3A" stroke-width="2"/>
